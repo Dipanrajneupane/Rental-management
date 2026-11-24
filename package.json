@@ -1,0 +1,26 @@
+{
+  "name": "bharatpur-bike-and-car-rental",
+  "version": "1.0.0",
+  "description": "Bharatpur Bike and Car Rental Management System",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "bharatpur",
+    "rental",
+    "bike",
+    "car",
+    "nepal"
+  ],
+  "author": "Bharatpur Bike and Car Rental",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.2.1",
+    "multer": "^2.1.1",
+    "mysql2": "^3.16.1",
+    "socket.io": "^4.8.1"
+  }
+}

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ne" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bharatpur Bike and Car Rental | भरतपुर बाइक एण्ड कार रेन्टल</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <!-- Logo and Brand -->
+      <a href="#" class="brand-wrapper" title="Bharatpur Bike and Car Rental">
+        <img src="assets/logo.png" alt="Bharatpur Bike and Car Rental Logo" class="brand-logo">
+        <div class="brand-titles">
+          <div class="brand-name">
+            BHARATPUR BIKE AND CAR RENTAL
+          </div>
+          <div class="brand-tagline" data-i18n="brandTagline">
+            Drive More, Spend Less
+          </div>
+        </div>
+      </a>
+
+      <!-- Center Contact & BS Date -->
+      <div class="header-center-info">
+        <div class="nepali-date-chip" id="headerNepaliDate">
+          <i class="fas fa-calendar-alt"></i> आज: लोड हुँदैछ...
+        </div>
+        <div class="contact-pill">
+          <i class="fas fa-phone-alt" style="color: var(--primary);"></i>
+          <span><a href="tel:9855014549">9855014549</a> / <a href="tel:9845045924">9845045924</a></span>
+        </div>
+        <div class="contact-pill" title="Head Office">
+          <i class="fas fa-map-marker-alt" style="color: #EF4444;"></i>
+          <span data-i18n="branchLocation">Bharatpur-10, Balmandir Road</span>
+        </div>
+      </div>
+
+      <!-- Header Actions: Right Top Corner Location, Language Switcher, Theme Toggle & Live Sync Status -->
+      <div class="header-actions">
+        <!-- Prominent Right Top Corner Location Badge -->
+        <div class="top-location-badge" title="Branch Location">
+          <i class="fas fa-map-marker-alt"></i>
+          <span data-i18n="locationHeader">Gaindakot-4, Congress Chowk</span>
+        </div>
+
+        <!-- Language Selector (English / Nepali) -->
+        <div class="lang-switcher" aria-label="Select Language">
+          <button type="button" class="lang-btn active" data-lang="np" onclick="switchLanguage('np')">नेपाली</button>
+          <button type="button" class="lang-btn" data-lang="en" onclick="switchLanguage('en')">EN</button>
+        </div>
+
+        <!-- Live Sync Status -->
+        <div class="live-sync-indicator" id="dbBadge" title="Real-time Synchronization Engine">
+          <span class="sync-dot" id="syncDot"></span>
+          <span id="liveSyncText" data-i18n="liveSyncText">Live Connected</span>
+        </div>
+
+        <!-- Theme Toggle Button -->
+        <button type="button" class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Theme (Dark / Light)">
+          <i class="fas fa-sun" id="themeIcon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN WRAPPER -->
+  <main class="main-wrapper">
+
+    <!-- TOP STATISTICS BAR (Vehicle count by status and category) -->
+    <section class="stats-container" aria-label="Vehicle Statistics">
+      <!-- Available Card -->
+      <div class="stat-card avail">
+        <div class="stat-header">
+          <div class="stat-title">
+            <span class="stat-icon">🟢</span> <span data-i18n="statAvailTitle">उपलब्ध सवारी साधन (Available)</span>
+          </div>
+        </div>
+        <div class="stat-count" id="statAvailCount">0</div>
+        <div class="stat-breakdown">
+          <span data-i18n="breakdown">विभाजन:</span>
+          <span id="statAvailBreakdown">🛵 0 | 🏍️ 0 | 🚗 0</span>
+        </div>
+      </div>
+
+      <!-- On Rent Card -->
+      <div class="stat-card rent">
+        <div class="stat-header">
+          <div class="stat-title">
+            <span class="stat-icon">🔴</span> <span data-i18n="statRentTitle">भाडामा गएको (On Rent)</span>
+          </div>
+        </div>
+        <div class="stat-count" id="statRentCount">0</div>
+        <div class="stat-breakdown">
+          <span data-i18n="breakdown">विभाजन:</span>
+          <span id="statRentBreakdown">🛵 0 | 🏍️ 0 | 🚗 0</span>
+        </div>
+      </div>
+
+      <!-- Booked Card -->
+      <div class="stat-card book">
+        <div class="stat-header">
+          <div class="stat-title">
+            <span class="stat-icon">🟣</span> <span data-i18n="statBookTitle">अग्रिम बुकिङ (Booked)</span>
+          </div>
+        </div>
+        <div class="stat-count" id="statBookCount">0</div>
+        <div class="stat-breakdown">
+          <span data-i18n="breakdown">विभाजन:</span>
+          <span id="statBookBreakdown">🛵 0 | 🏍️ 0 | 🚗 0</span>
+        </div>
+      </div>
+
+      <!-- Total Fleet Card -->
+      <div class="stat-card total">
+        <div class="stat-header">
+          <div class="stat-title">
+            <span class="stat-icon">🏎️</span> <span data-i18n="statTotalTitle">कुल सवारी साधन (Total Fleet)</span>
+          </div>
+        </div>
+        <div class="stat-count" id="statTotalCount">0</div>
+        <div class="stat-breakdown">
+          <span data-i18n="breakdown">विभाजन:</span>
+          <span id="statTotalBreakdown">🛵 0 | 🏍️ 0 | 🚗 0</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOOLBAR & CONTROLS -->
+    <section class="toolbar-section">
+      <div class="toolbar-row">
+        <!-- View Tabs -->
+        <div style="display: flex; gap: 8px;">
+          <button type="button" class="btn btn-secondary active" id="viewVehiclesBtn">
+            <i class="fas fa-th-large"></i> <span data-i18n="tabFleet">सवारी साधनहरू (Fleet)</span>
+          </button>
+          <button type="button" class="btn btn-secondary" id="viewHistoryBtn">
+            <i class="fas fa-history"></i> <span data-i18n="tabHistory">ग्राहक भाडा इतिहास (History)</span> 
+            <span class="days-tag" id="historyCountBadge">0</span>
+          </button>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons-group">
+          <button type="button" class="btn btn-primary" onclick="openAddVehicleModal()">
+            <i class="fas fa-plus-circle"></i> <span data-i18n="btnAddVehicle">नयाँ सवारी थप्नुहोस् (Add Vehicle)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Secondary Filters Row (Category Tabs & Search) -->
+      <div class="filter-row">
+        <!-- Categories: Scooty, Bike, Car -->
+        <div class="category-tabs">
+          <button type="button" class="cat-tab-btn active" data-category="all">
+            <span data-i18n="catAll">सबै (All)</span> <span class="badge-pill" id="catBadgeAll">0</span>
+          </button>
+          <button type="button" class="cat-tab-btn" data-category="scooty">
+            <span data-i18n="catScooty">🛵 स्कुटी (Scooty)</span> <span class="badge-pill" id="catBadgeScooty">0</span>
+          </button>
+          <button type="button" class="cat-tab-btn" data-category="bike">
+            <span data-i18n="catBike">🏍️ बाइक (Bike)</span> <span class="badge-pill" id="catBadgeBike">0</span>
+          </button>
+          <button type="button" class="cat-tab-btn" data-category="car">
+            <span data-i18n="catCar">🚗 कार (Car)</span> <span class="badge-pill" id="catBadgeCar">0</span>
+          </button>
+        </div>
+
+        <!-- Search Input -->
+        <div class="search-box">
+          <i class="fas fa-search search-icon"></i>
+          <input type="text" id="vehicleSearchInput" placeholder="सवारी नाम, नम्बर वा ग्राहक खोज्नुहोस्..." data-i18n-placeholder="searchPlaceholder">
+        </div>
+
+        <!-- Status Filter Pills -->
+        <div class="status-filter-pills">
+          <button type="button" class="status-pill active" data-status="all" data-i18n="statusAll">सबै स्थिति</button>
+          <button type="button" class="status-pill" data-status="available" data-i18n="statusAvail">🟢 उपलब्ध</button>
+          <button type="button" class="status-pill" data-status="rented" data-i18n="statusRent">🔴 भाडामा</button>
+          <button type="button" class="status-pill" data-status="booked" data-i18n="statusBook">🟣 बुकिङ</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 1: VEHICLES FLEET GRID -->
+    <section id="vehiclesSection">
+      <div class="section-header">
+        <h2 class="section-title">
+          <i class="fas fa-motorcycle" style="color: var(--primary);"></i> <span data-i18n="fleetTitle">सवारी साधन सूची (Vehicle Fleet)</span>
+        </h2>
+        <span class="section-subtitle" data-i18n="fleetSubtitle">कुनै पनि सवारीमा क्लिक गरेर भाडामा दिन, बुकिङ गर्न वा फिर्ता लिन सकिन्छ।</span>
+      </div>
+
+      <div class="vehicles-grid" id="vehiclesGrid">
+        <!-- Dynamically Populated with Cards -->
+      </div>
+    </section>
+
+    <!-- SECTION 2: RENTAL HISTORY TABLE -->
+    <section id="historySection" class="history-section">
+      <div class="history-toolbar">
+        <div>
+          <h2 class="section-title">
+            <i class="fas fa-history" style="color: var(--primary);"></i> <span data-i18n="historyTitle">ग्राहक भाडा इतिहास (Past Customer Rental History)</span>
+          </h2>
+          <span class="section-subtitle" data-i18n="historySubtitle">कुन ग्राहकले कुन सवारी कहिले देखि कहिले सम्म लगेका थिए सोको पूर्ण विवरण</span>
+        </div>
+
+        <div class="search-box" style="max-width: 380px;">
+          <i class="fas fa-search search-icon"></i>
+          <input type="text" id="historySearchInput" placeholder="ग्राहकको नाम, मोबाइल वा गाडी नम्बर खोज्नुहोस्..." data-i18n-placeholder="historySearchPlaceholder">
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th data-i18n="thVehicle">सवारी साधन विवरण</th>
+              <th data-i18n="thCustomer">ग्राहकको नाम</th>
+              <th data-i18n="thPhone">सम्पर्क नम्बरहरू (१-४)</th>
+              <th data-i18n="thStartDate">भाडा सुरु मिति (BS)</th>
+              <th data-i18n="thReturnDate">फिर्ता मिति (BS)</th>
+              <th data-i18n="thDaysAmt">दिन / रकम</th>
+              <th data-i18n="thAction">कार्य (Action)</th>
+            </tr>
+          </thead>
+          <tbody id="historyTableBody">
+            <!-- Dynamically populated rows -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-top-row">
+        <div class="footer-brand">
+          <img src="assets/logo.png" alt="Bharatpur Bike and Car Rental Logo" class="footer-logo">
+          <div>
+            <div style="font-weight: 800; font-size: 1.1rem; color: var(--text-main);">BHARATPUR BIKE AND CAR RENTAL</div>
+            <div style="font-size: 0.8rem; color: var(--primary); font-weight: 700;" data-i18n="brandTagline">Drive More, Spend Less</div>
+          </div>
+        </div>
+
+        <div class="footer-contacts-list">
+          <div class="footer-contact-item">
+            <i class="fas fa-map-marker-alt" style="color: #EA580C;"></i>
+            <span style="font-weight: 700;" data-i18n="locationHeader">Gaindakot-4, Congress Chowk</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-phone-alt" style="color: var(--primary);"></i>
+            <span><a href="tel:9855014549">9855014549</a>, <a href="tel:9845045924">9845045924</a></span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-map-marker-alt" style="color: #EF4444;"></i>
+            <span data-i18n="branchLocation">Bharatpur-10, Balmandir Road</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-envelope" style="color: #3B82F6;"></i>
+            <span><a href="mailto:bharatpurbikerental82@gmail.com">bharatpurbikerental82@gmail.com</a></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom-row">
+        <div class="footer-copyright">
+          <span data-i18n="footerCopyright">&copy; Bharatpur Bike and Car Rental. All Rights Reserved.</span>
+        </div>
+        <div>
+          <span data-i18n="footerTagline">नेपाली क्यालेन्डर (बिक्रम संवत् - BS) सहितको पूर्ण स्वचालित प्रणाली</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL 1: VEHICLE CLICK DIRECT POPOUT (Rent / Book / Check / Return) -->
+  <div class="modal-overlay" id="vehicleActionModal" onclick="if(event.target === this) closeVehicleActionModal()">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title" id="vehicleActionModalTitle">
+          <i class="fas fa-clipboard-check" style="color: var(--primary);"></i> <span data-i18n="modalTitleRent">सवारी साधन भाडा / बुकिङ विवरण</span>
+        </div>
+        <button type="button" class="modal-close-btn" onclick="closeVehicleActionModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="vehicleActionModalBody">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: ADD / EDIT VEHICLE MODAL -->
+  <div class="modal-overlay" id="vehicleFormModal" onclick="if(event.target === this) closeVehicleFormModal()">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title" id="vehicleFormModalTitle">
+          <i class="fas fa-plus-circle"></i> <span data-i18n="addVehicleModalTitle">नयाँ सवारी साधन थप्नुहोस्</span>
+        </div>
+        <button type="button" class="modal-close-btn" onclick="closeVehicleFormModal()">&times;</button>
+      </div>
+      <form id="vehicleForm">
+        <input type="hidden" id="editVehicleId">
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label"><span data-i18n="labelVehCategory">सवारी वर्ग (Category)</span> <span class="req">*</span></label>
+              <select id="vehicleCatSelect" class="form-control" required>
+                <option value="scooty">🛵 Scooty</option>
+                <option value="bike" selected>🏍️ Bike</option>
+                <option value="car">🚗 Car</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label"><span data-i18n="labelVehName">सवारीको नाम / मोडल</span> <span class="req">*</span></label>
+              <input type="text" id="vehicleNameInput" class="form-control" placeholder="Royal Enfield Classic 350 / Pulsar 220" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label"><span data-i18n="labelVehPlate">सवारी नम्बर प्लेट</span> <span class="req">*</span></label>
+              <input type="text" id="vehiclePlateInput" class="form-control" placeholder="BA 03 PA 9901 / बा ०३-००२ प ९९०१" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label"><span data-i18n="labelVehRate">दैनिक भाडा दर (रु. प्रति दिन)</span> <span class="req">*</span></label>
+              <input type="number" id="vehicleRateInput" class="form-control" placeholder="1500" min="0" required>
+            </div>
+
+            <div class="form-group full">
+              <label class="form-label"><span data-i18n="labelVehPhoto">फोटो अपलोड गर्नुहोस् वा फोटो लिंक (Photo)</span></label>
+              <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <input type="file" id="vehiclePhotoFile" accept="image/*" class="form-control" style="flex: 1; min-width: 200px;">
+                <input type="text" id="vehiclePhotoInput" class="form-control" placeholder="https://..." style="flex: 2; min-width: 250px;">
+              </div>
+              <div style="margin-top: 8px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                <span style="font-size: 0.75rem; color: var(--text-muted);" data-i18n="quickPresets">वा छिटो फोटो छनौट गर्नुहोस्:</span>
+                <button type="button" class="btn btn-secondary" style="padding: 2px 8px; font-size: 0.72rem;" onclick="setPresetPhoto('https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=800&q=80')">🏍️ Bullet Bike</button>
+                <button type="button" class="btn btn-secondary" style="padding: 2px 8px; font-size: 0.72rem;" onclick="setPresetPhoto('https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=800&q=80')">🛵 Scooty</button>
+                <button type="button" class="btn btn-secondary" style="padding: 2px 8px; font-size: 0.72rem;" onclick="setPresetPhoto('https://images.unsplash.com/photo-1609630875171-b1321377ee65?auto=format&fit=crop&w=800&q=80')">🏍️ Sports Bike</button>
+                <button type="button" class="btn btn-secondary" style="padding: 2px 8px; font-size: 0.72rem;" onclick="setPresetPhoto('https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&q=80')">🚗 Car / SUV</button>
+              </div>
+              <img id="photoPreviewImg" alt="Preview" style="margin-top: 10px; max-height: 120px; border-radius: var(--radius-sm); object-fit: cover; display: none; border: 1px solid var(--border-color);">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeVehicleFormModal()" data-i18n="btnCancel">रद्द गर्नुहोस्</button>
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-save"></i> <span data-i18n="btnSaveVehicle">सवारी सुरक्षित गर्नुहोस्</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Socket.IO Client -->
+  <script src="/socket.io/socket.io.js"></script>
+  <!-- I18n Multilingual Support -->
+  <script src="js/i18n.js"></script>
+  <!-- Nepali Date & Calendar Libraries -->
+  <script src="js/nepali-date.js"></script>
+  <script src="js/nepali-picker.js"></script>
+  <!-- Main Application Script -->
+  <script src="js/app.js"></script>
+</body>
+</html>
